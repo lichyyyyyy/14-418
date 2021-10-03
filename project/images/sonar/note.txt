@@ -1,0 +1,6 @@
+docker pull sonarqube
+
+docker pull sonarsource/sonar-scanner-cli
+
+
+https://docs.sonarqube.org/latest/analysis/scan/sonarscanner/
