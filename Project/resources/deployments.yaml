@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: controller
+  labels:
+    app: controller
+spec:
+  selector:
+    matchLabels:
+      app: controller
+    
+  replicas: 2
+  minReadySeconds: 15
+  strategy:
+    type: RollingUpdate
+    rollingUpdate: 
+      maxUnavailable: 1
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: controller
+    spec:
+      containers:
+        - image: lichyyyyyy/14848-controller:latest
+          imagePullPolicy: Always
+          name: controller
+          ports:
+            - containerPort: 8080
