@@ -1,5 +1,0 @@
-https://shortcut.com/developer-how-to/how-to-set-up-a-hadoop-cluster-in-docker
-
-https://github.com/big-data-europe/docker-hadoop
-
-

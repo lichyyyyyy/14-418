@@ -1,15 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: controller
+  name: jupyter
   labels:
-    app: controller
+    app: jupyter
+  namespace: project
 spec:
   selector:
     matchLabels:
-      app: controller
+      app: jupyter
     
-  replicas: 2
+  replicas: 1
   minReadySeconds: 15
   strategy:
     type: RollingUpdate
@@ -19,11 +20,11 @@ spec:
   template:
     metadata:
       labels:
-        app: controller
+        app: jupyter
     spec:
       containers:
-        - image: lichyyyyyy/14848-controller:latest
-          imagePullPolicy: Always
-          name: controller
+        - image: lichyyyyyy/14848-jupyter-notebook:1.0
+          imagePullPolicy: IfNotPresent
+          name: jupyter
           ports:
-            - containerPort: 8080
+            - containerPort: 8888

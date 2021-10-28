@@ -1,7 +1,0 @@
-https://hub.docker.com/r/bitnami/jupyter-base-notebook
-
-docker pull bitnami/jupyter-base-notebook
-
-
-# to build an image for M1 chip (still not working)
-docker build --platform linux/x86_64 -t bitnami/jupyter-base-notebook:latest .
