@@ -23,7 +23,7 @@ spec:
         app: controller
     spec:
       containers:
-        - image: lichyyyyyy/14848-controller:1.0
+        - image: lichyyyyyy/14848-controller:1.1
           imagePullPolicy: IfNotPresent
           name: controller
           ports:
