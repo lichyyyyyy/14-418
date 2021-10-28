@@ -40,26 +40,11 @@
 
 ## File directory
 
-> .
-> ├── checkpoint
-> │   ├── readme.md
-> │   └── screenshots
->
-> └── entry 
-> └── resources
->     ├── deployment-controller.yaml
->     ├── deployment-hadoop.yaml
->     ├── deployment-jupyter.yaml
->     ├── deployment-sonar.yaml
->     ├── deployment-spark.yaml
->     ├── loadbalancer.yaml
->     └── services.yaml
-
 ```entry/```: source codes for the ternimal, which is implemented using Flask
 
 ```resources/```: source codes to deploy on k8s
 
-```checkpoint/```: the required materials for checkpoint
+```checkpoint/```: the required screenshots for checkpoint
 
 
 
