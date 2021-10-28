@@ -1,7 +1,9 @@
-from flask import Flask, redirect, render_template, request
+from flask import Flask, redirect, render_template, request, Response
 import os
+import requests
 
 app = Flask(__name__)
+global endpoint
 
 
 @app.route("/")
@@ -12,7 +14,6 @@ def hello_world():
 @app.route("/", methods=["POST"])
 def choose_application():
     application = request.form['application']
-    print(application)
     if application == '1':
         return hadoop()
     elif application == '2':
@@ -24,26 +25,44 @@ def choose_application():
 
 @app.route("/hadoop")
 def hadoop():
-    hadoop_endpoint = os.environ.get("hadoop_endpoint")
-    return redirect(hadoop_endpoint)
+    global endpoint
+    endpoint = os.environ.get("hadoop_endpoint")
+    return forward(endpoint)
 
 
 @app.route("/spark")
 def spark():
-    spark_endpoint = os.environ.get("spark_endpoint")
-    return redirect(spark_endpoint)
+    global endpoint
+    endpoint = os.environ.get("spark_endpoint")
+    return forward(endpoint)
 
 
 @app.route("/sonar")
 def sonar():
-    sonar_endpoint = os.environ.get("sonar_endpoint")
-    return redirect(sonar_endpoint)
+    global endpoint
+    endpoint = os.environ.get("sonar_endpoint")
+    return forward(endpoint)
 
 
 @app.route("/jupyter")
 def jupyter():
-    jupyter_endpoint = os.environ.get("jupyter_endpoint")
-    return redirect(jupyter_endpoint)
+    global endpoint
+    endpoint = os.environ.get("jupyter_endpoint")
+    return forward(endpoint)
+
+
+def forward(url):
+    resp = requests.get(url)
+    excluded_headers = ['content-encoding', 'content-length', 'transfer-encoding', 'connection']
+    headers = [(name, value) for (name, value) in resp.raw.headers.items()
+               if name.lower() not in excluded_headers]
+    response = Response(resp.content, resp.status_code, headers)
+    return response
+
+
+@app.route('/<path:path>')
+def forward_additional_resources(path):
+    return forward(endpoint+'/'+path)
 
 
 if __name__ == '__main__':
