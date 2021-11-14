@@ -20,7 +20,7 @@
 
 ## File directory
 
-> .
+> Project
 > ├── checkpoint
 > │   ├── readme.md
 > │   └── screenshots
