@@ -1,0 +1,8 @@
+Jupiter: directly use
+
+Spark: kubectl exec <pod_name> -n project -c spark -- spark-submit
+
+Sonar scanner: kubectl exec <pod_name> -n project -c sonar-scanner -- sonar-scanner
+
+
+
