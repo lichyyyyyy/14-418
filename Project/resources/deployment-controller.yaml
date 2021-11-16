@@ -1,14 +1,14 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: controller
+  name: driver
   labels:
-    app: controller
+    app: driver
   namespace: project
 spec:
   selector:
     matchLabels:
-      app: controller
+      app: driver
     
   replicas: 1
   minReadySeconds: 15
@@ -20,20 +20,20 @@ spec:
   template:
     metadata:
       labels:
-        app: controller
+        app: driver
     spec:
       containers:
         - image: lichyyyyyy/14848-controller:1.1
           imagePullPolicy: IfNotPresent
-          name: controller
+          name: driver
           ports:
             - containerPort: 5000
           env:
             - name: hadoop_endpoint
-              value: http://hadoop-service.project.svc.cluster.local:9870
+              value: http://hadoop-lb.project.svc.cluster.local:9870
             - name: spark_endpoint
-              value: http://spark-service.project.svc.cluster.local:8080
+              value: http://spark-lb.project.svc.cluster.local:8080
             - name: sonar_endpoint
-              value: http://sonar-service.project.svc.cluster.local:9000
+              value: http://sonar-lb.project.svc.cluster.local:9000
             - name: jupyter_endpoint
-              value: http://jupyter-service.project.svc.cluster.local:8888
+              value: http://jupyter-lb.project.svc.cluster.local:8888
