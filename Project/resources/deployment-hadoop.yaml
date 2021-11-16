@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: hadoop
+  name: hadoop-namenode
   labels:
     app: hadoop-namenode
   namespace: project
@@ -9,7 +9,7 @@ spec:
   selector:
     matchLabels:
       app: hadoop-namenode
-    
+  replicas: 1
   minReadySeconds: 15
   strategy:
     type: RollingUpdate
@@ -22,11 +22,31 @@ spec:
         app: hadoop-namenode
     spec:
       containers:
-      - image: lichyyyyyy/14848-hadoop-datanode:1.0
+      - image: lichyyyyyy/14848-hadoop-namenode:1.0
         imagePullPolicy: IfNotPresent
         name: hadoop-namenode
         ports:
           - containerPort: 9870
+          - containerPort: 9000
+        env:
+          - name: CORE_CONF_fs_defaultFS
+            value: hdfs://namenode:9000
+          - name: CLUSTER_NAME
+            value: mycluster
+          - name: CORE_CONF_hadoop_http_staticuser_user
+            value: root
+          - name: CORE_CONF_hadoop_proxyuser_hue_hosts
+            value: "*"
+          - name: CORE_CONF_hadoop_proxyuser_hue_groups
+            value: "*"
+          - name: CORE_CONF_io_compression_codecs
+            value: "org.apache.hadoop.io.compress.SnappyCodec"
+          - name: HDFS_CONF_dfs_webhdfs_enabled
+            value: "true"
+          - name: HDFS_CONF_dfs_permissions_enabled
+            value: "false"
+          - name: HDFS_CONF_dfs_namenode_datanode_registration_ip___hostname___check
+            value: "false"
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -39,7 +59,6 @@ spec:
   selector:
     matchLabels:
       app: hadoop-datanode
-    
   replicas: 2
   minReadySeconds: 15
   strategy:
@@ -53,9 +72,39 @@ spec:
         app: hadoop-datanode
     spec:
       containers:
-        - image: lichyyyyyy/14848-hadoop-datanode:1.0
-          imagePullPolicy: IfNotPresent
-          name: hadoop-datanode
-          env: 
+      - image: lichyyyyyy/14848-hadoop-datanode:1.0
+        imagePullPolicy: IfNotPresent
+        name: hadoop-datanode
+        env: 
           - name: SERVICE_PRECONDITION
-            value: "namenode:9870"
+            value: "hadoop-namenode:9870"
+          - name: CORE_CONF_fs_defaultFS
+            value: hdfs://namenode:9000
+          - name: CLUSTER_NAME
+            value: mycluster
+          - name: CORE_CONF_hadoop_http_staticuser_user
+            value: root
+          - name: CORE_CONF_hadoop_proxyuser_hue_hosts
+            value: "*"
+          - name: CORE_CONF_hadoop_proxyuser_hue_groups
+            value: "*"
+          - name: CORE_CONF_io_compression_codecs
+            value: "org.apache.hadoop.io.compress.SnappyCodec"
+          - name: HDFS_CONF_dfs_webhdfs_enabled
+            value: "true"
+          - name: HDFS_CONF_dfs_permissions_enabled
+            value: "false"
+          - name: HDFS_CONF_dfs_namenode_datanode_registration_ip___hostname___check
+            value: "false"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: namenode
+  namespace: project
+spec:
+  ports:
+  - port: 9000
+    targetPort: 9000
+  selector:
+    app: hadoop-namenode

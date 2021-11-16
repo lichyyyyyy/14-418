@@ -1,8 +1,11 @@
 Jupiter: directly use
 
 Spark: kubectl exec <pod_name> -n project -c spark -- spark-submit
+https://spark.apache.org/docs/latest/submitting-applications.html
 
-Sonar scanner: kubectl exec <pod_name> -n project -c sonar-scanner -- sonar-scanner
+Sonar scanner: kubectl exec <pod_name> -n project -c sonar-scanner -- sonar-scanner -D sonar.login=<Authencation_Token>
+
+kubectl exec pod/sonar-6cc49cbcb5-kl2zn  -n project -c sonar-scanner -- sonar-scanner -D sonar.login=5a14b443cc0fa9e53231234431cab48ffbcdf4d5
 
 
 

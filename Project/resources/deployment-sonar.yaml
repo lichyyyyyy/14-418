@@ -9,7 +9,6 @@ spec:
   selector:
     matchLabels:
       app: sonar
-    
   replicas: 1
   minReadySeconds: 15
   strategy:
@@ -25,6 +24,24 @@ spec:
       containers:
         - image: lichyyyyyy/14848-sonarqube:1.0
           imagePullPolicy: IfNotPresent
-          name: sonarqube
+          name: sonar
           ports:
             - containerPort: 9000
+        - image: lichyyyyyy/14848-sonar-scanner:1.1
+          imagePullPolicy: IfNotPresent
+          name: sonar-scanner
+          env:
+            - name: SONAR_HOST_URL
+              value: "http://sonarqube:9000"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sonarqube
+  namespace: project
+spec:
+  ports:
+  - port: 9000
+    targetPort: 9000
+  selector:
+    app: sonar
