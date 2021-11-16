@@ -21,7 +21,7 @@ const services = [
       '2 worker nodes',
     ],
     code: 'kubectl exec <POD_NAME> -n project -c spark -- spark-submit',
-    link: "http://www.google.com",
+    link: "http://spark-service",
     buttonText: 'Portal',
     buttonVariant: 'contained',
   },
@@ -32,15 +32,15 @@ const services = [
       '2 worker nodes',
     ],
     buttonText: 'Portal',
-    link: "driver:8087/hadoop",
+    link: "http://hadoop-service",
     buttonVariant: 'contained', // outlined
   },
   {
-    title: 'Jupiter Notebook',
+    title: 'Jupyter Notebook',
     description: [
     ],
     buttonText: 'Get started',
-    link: "http://driver:8087/jupiter",
+    link: "http://jupyter-service",
     buttonVariant: 'contained',
   },
   {
@@ -49,7 +49,7 @@ const services = [
     ],
     code: 'kubectl exec <POD_NAME> -n project -c sonar-scanner -- sonar-scanner',
     buttonText: 'Portal',
-    link: "http://driver:8087/sonarqube",
+    link: "http://sonarqube-service",
     buttonVariant: 'contained',
   },
 ];
