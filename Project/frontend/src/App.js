@@ -21,7 +21,7 @@ const services = [
       '2 worker nodes',
     ],
     code: 'kubectl exec <POD_NAME> -n project -c spark -- spark-submit',
-    link: "http://spark-service",
+    link: "http://chunying.big-data-toolbox.com:8080",
     buttonText: 'Portal',
     buttonVariant: 'contained',
   },
@@ -32,7 +32,7 @@ const services = [
       '2 worker nodes',
     ],
     buttonText: 'Portal',
-    link: "http://hadoop-service",
+    link: "http://chunying.big-data-toolbox.com:9870",
     buttonVariant: 'contained', // outlined
   },
   {
@@ -40,7 +40,7 @@ const services = [
     description: [
     ],
     buttonText: 'Get started',
-    link: "http://jupyter-service",
+    link: "http://chunying.big-data-toolbox.com:8888",
     buttonVariant: 'contained',
   },
   {
@@ -49,7 +49,7 @@ const services = [
     ],
     code: 'kubectl exec <POD_NAME> -n project -c sonar-scanner -- sonar-scanner',
     buttonText: 'Portal',
-    link: "http://sonarqube-service",
+    link: "http://chunying.big-data-toolbox.com:9000",
     buttonVariant: 'contained',
   },
 ];
