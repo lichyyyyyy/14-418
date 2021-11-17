@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  labels:
+    app: frontend
+  namespace: project
+spec:
+  selector:
+    matchLabels:
+      app: frontend
+    
+  replicas: 1
+  minReadySeconds: 15
+  strategy:
+    type: RollingUpdate
+    rollingUpdate: 
+      maxUnavailable: 1
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+        - image: lichyyyyyy/14848-frontend:1.0
+          imagePullPolicy: IfNotPresent
+          name: frontend
+          ports:
+            - containerPort: 3000
