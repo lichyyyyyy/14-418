@@ -1,4 +1,6 @@
 import './App.css';
+import hadoop from './resources/hadoop.svg';
+import jupyter from './resources/jupyter.png';
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -33,13 +35,17 @@ const services = [
       '2 worker nodes',
     ],
     buttonText: 'Portal',
+    logo: hadoop,
     link: host_eip+":9870",
     buttonVariant: 'contained', // outlined
   },
   {
     title: 'Jupyter Notebook',
     description: [
+      "Password: admin",
+      "Token: "
     ],
+    logo: jupyter,
     buttonText: 'Get started',
     link: host_eip+":8888",
     buttonVariant: 'contained',
@@ -47,6 +53,8 @@ const services = [
   {
     title: 'SonarQube SonarScanner',
     description: [
+      "2 containers",
+      "1 internal service"
     ],
     code: 'kubectl exec <POD_NAME> -n project -c sonar-scanner -- sonar-scanner',
     buttonText: 'Portal',
@@ -74,10 +82,12 @@ function App() {
       </Typography>
     </Container>
     <Container disableGutters maxWidth="lg" component="main" sx={{ pt: 2, pb: 15 }}>
-      <Typography variant="h5" align="center" color="text.secondary" component="p">
-        Quickly build an effective pricing table for your potential customers with
-        this layout. It&apos;s built with default MUI components with little
-        customization.
+      <Typography variant="h5" align="center" color="text.secondary" component="p" fontFamily="fantasy">
+        <i>This is a microservice-based application built by <b>Chunying LI</b> in 2021.</i>
+      </Typography>
+      <Typography variant="h6" align="center" color="text.secondary" component="p">
+        Users could run Apache Hadoop, Spark, Jupyter Notebooks, SonarQube and SonarScanner without having to install any of them
+        in this application.
       </Typography>
     </Container>
     
@@ -113,12 +123,16 @@ function App() {
                     justifyContent: "space-between",
                     lineBreak: "auto",
                     alignItems: 'baseline',
-                    mb: 2,
+                    mb: 1,
+                    height: 200
                   }}
                 >
-                  <Typography fontSize='0.7rem' color="text.secondary" fontFamily="monospace">
+                  <Typography sx={{mt: 2}} fontSize='0.8rem' color="text.secondary" fontFamily="monospace" align="center">
                   {service.code}
                   </Typography>
+                  {service.logo ? (
+                    <img src={service.logo} alt='logo'></img>
+                  ) : (<div></div>)}
                 </Box>
 
                 <ul>
@@ -134,7 +148,7 @@ function App() {
                   ))}
                 </ul>
               </CardContent>
-              <a href={service.link}>
+              <a href={service.link} style={{textDecoration: 'none'}}>
                 <CardActions>
                     <Button fullWidth variant={service.buttonVariant}>
                       {service.buttonText}
