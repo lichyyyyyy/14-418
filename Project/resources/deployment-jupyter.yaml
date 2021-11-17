@@ -9,7 +9,6 @@ spec:
   selector:
     matchLabels:
       app: jupyter
-    
   replicas: 1
   minReadySeconds: 15
   strategy:
@@ -23,7 +22,7 @@ spec:
         app: jupyter
     spec:
       containers:
-        - image: lichyyyyyy/14848-jupyter-notebook:1.0
+        - image: lichyyyyyy/14848-jupyter-notebook:1.1
           imagePullPolicy: IfNotPresent
           name: jupyter
           ports:
