@@ -12,6 +12,7 @@ import Typography from '@mui/material/Typography';
 import GlobalStyles from '@mui/material/GlobalStyles';
 import Container from '@mui/material/Container';
 
+const host_eip = process.env.REACT_APP_EIP;
 
 const services = [
   {
@@ -21,7 +22,7 @@ const services = [
       '2 worker nodes',
     ],
     code: 'kubectl exec <POD_NAME> -n project -c spark -- spark-submit',
-    link: "http://chunying.big-data-toolbox.com:8080",
+    link: host_eip+":8080",
     buttonText: 'Portal',
     buttonVariant: 'contained',
   },
@@ -32,7 +33,7 @@ const services = [
       '2 worker nodes',
     ],
     buttonText: 'Portal',
-    link: "http://chunying.big-data-toolbox.com:9870",
+    link: host_eip+":9870",
     buttonVariant: 'contained', // outlined
   },
   {
@@ -40,7 +41,7 @@ const services = [
     description: [
     ],
     buttonText: 'Get started',
-    link: "http://chunying.big-data-toolbox.com:8888",
+    link: host_eip+":8888",
     buttonVariant: 'contained',
   },
   {
@@ -49,13 +50,14 @@ const services = [
     ],
     code: 'kubectl exec <POD_NAME> -n project -c sonar-scanner -- sonar-scanner',
     buttonText: 'Portal',
-    link: "http://chunying.big-data-toolbox.com:9000",
+    link: host_eip+":9000",
     buttonVariant: 'contained',
   },
 ];
 
 
 function App() {
+  console.log("env: "+JSON.stringify(process.env));
   return (
   <React.Fragment>
     <GlobalStyles styles={{ ul: { margin: 0, padding: 0, listStyle: 'none' } }} />

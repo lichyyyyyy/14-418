@@ -28,3 +28,6 @@ spec:
           name: frontend
           ports:
             - containerPort: 3000
+          env:
+            - name: REACT_APP_EIP
+              value: 35.192.106.235

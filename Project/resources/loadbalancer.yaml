@@ -1,15 +1,16 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: driver-lb
+  name: frontend-lb
   namespace: project
 spec:
   type: LoadBalancer
   ports:
   - port: 80
-    targetPort: 5000
+    targetPort: 3000
+  loadBalancerIP: 35.192.106.235
   selector:
-    app: driver
+    app: frontend
 ---
 apiVersion: v1
 kind: Service
@@ -21,6 +22,7 @@ spec:
   ports:
   - port: 9870
     targetPort: 9870
+  loadBalancerIP: 35.192.106.235
   selector:
     app: hadoop-namenode
 ---
@@ -34,6 +36,7 @@ spec:
   ports:
   - port: 9000
     targetPort: 9000
+  loadBalancerIP: 35.192.106.235
   selector:
     app: sonar
 ---
@@ -47,6 +50,7 @@ spec:
   ports:
   - port: 8080
     targetPort: 8080
+  loadBalancerIP: 35.192.106.235
   selector:
     app: spark
 ---
@@ -60,5 +64,6 @@ spec:
   ports:
   - port: 8888
     targetPort: 8888
+  loadBalancerIP: 35.192.106.235
   selector:
     app: jupyter
