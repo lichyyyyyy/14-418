@@ -101,9 +101,9 @@ This shared folder contains 3 recording:
 
 ### Docker URLs
 
-1. Controller (the terminal): https://hub.docker.com/repository/docker/lichyyyyyy/14848-controller
+1. Controller (the frontend): https://hub.docker.com/repository/docker/lichyyyyyy/14848-frontend
 
-2. Jupyter notebook: https://hub.docker.com/repository/docker/lichyyyyyy/14848-jupyter-notebook
+2. Jupyter notebook: https://hub.docker.com/r/jupyter/base-notebook
 
 3. Spark: https://hub.docker.com/repository/docker/lichyyyyyy/14848-spark
 
