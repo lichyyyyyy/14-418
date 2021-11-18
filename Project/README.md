@@ -24,9 +24,9 @@
 
 2. Configure regarding varibles to the static IP in the deployment files.
 
-   In `deployment-frontend.yaml`, update the env variable `REACT_APP_EIP`.
+   In `resources/deployment-frontend.yaml`, update the env variable `REACT_APP_EIP`.
 
-   In `loadbalancer.yaml`, update the configuration  `loadBalancerIP`.
+   In `resources/loadbalancer.yaml`, update the configuration  `loadBalancerIP`.
 
 3. Create a new GKE cluster.
 
@@ -49,6 +49,7 @@
 5. Deploy microservices and the frontend application.
 
    ```shell
+   cd resources
    kubectl apply -f deployment-frontend.yaml
    kubectl apply -f deployment-hadoop.yaml
    kubectl apply -f deployment-spark.yaml
@@ -82,7 +83,7 @@ This shared folder contains 3 recording:
 
 ### Dockerfile & Base images
 
-1. For the terminal: ```entry/Dockerfile```
+1. For the frontend: ```frontend/Dockerfile```
 
 2. Jupiter notebook: https://hub.docker.com/r/jupyter/base-notebook
 
