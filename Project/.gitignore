@@ -15,4 +15,6 @@ build/
 
 images/
 
+resources/usage.txt
+
 .DS_Store

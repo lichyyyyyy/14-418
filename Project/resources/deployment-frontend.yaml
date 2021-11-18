@@ -23,7 +23,7 @@ spec:
         app: frontend
     spec:
       containers:
-        - image: lichyyyyyy/14848-frontend:1.0
+        - image: lichyyyyyy/14848-frontend:1.1
           imagePullPolicy: IfNotPresent
           name: frontend
           ports:
