@@ -43,7 +43,7 @@ const services = [
     title: 'Jupyter Notebook',
     description: [
       "Password: admin",
-      "Token: "
+      "Token: a7bd21fd79bdf2dffca90ed272d147d695c131dddb6dcdad",
     ],
     logo: jupyter,
     buttonText: 'Get started',
@@ -136,7 +136,24 @@ function App() {
                 </Box>
 
                 <ul>
-                  {service.description.map((line) => (
+                  {
+                    service.title === "Jupyter Notebook" ? 
+                    (<div><Typography
+                      component="li"
+                      variant="subtitle1"
+                      align="center"
+                      key={service.title}
+                    >
+                      {service.description[0]} 
+                      </Typography>
+                      <Typography 
+                      component="li"
+                      variant="subtitle1"
+                      align="center"
+                      className='token_class'>
+                        {service.description[1]}
+                      </Typography>
+                    </div>) : (service.description.map((line) => (
                     <Typography
                       component="li"
                       variant="subtitle1"
@@ -144,8 +161,8 @@ function App() {
                       key={line}
                     >
                       {line}
-                    </Typography>
-                  ))}
+                    </Typography>)))
+                  }
                 </ul>
               </CardContent>
               <a href={service.link} style={{textDecoration: 'none'}}>

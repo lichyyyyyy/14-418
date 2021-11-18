@@ -8,4 +8,5 @@ Sonar scanner: kubectl exec <pod_name> -n project -c sonar-scanner -- sonar-scan
 kubectl exec pod/sonar-6cc49cbcb5-kl2zn  -n project -c sonar-scanner -- sonar-scanner -D sonar.login=5a14b443cc0fa9e53231234431cab48ffbcdf4d5
 
 
-
+kbs exec pod/jupyter-76bddcccbc-v7q5r -n project -- jupyte
+r-notebook list
