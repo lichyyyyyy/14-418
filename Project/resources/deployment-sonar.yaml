@@ -1,3 +1,4 @@
+# deploy sonar
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -34,6 +35,7 @@ spec:
             - name: SONAR_HOST_URL
               value: "http://sonarqube:9000"
 ---
+# both internal networking and exposure port
 apiVersion: v1
 kind: Service
 metadata:

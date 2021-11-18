@@ -1,3 +1,4 @@
+# deploy the hadoop service
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -26,7 +27,9 @@ spec:
         imagePullPolicy: IfNotPresent
         name: hadoop-namenode
         ports:
+          # the port to be exposed
           - containerPort: 9870
+          # the port for internal connection
           - containerPort: 9000
         env:
           - name: CORE_CONF_fs_defaultFS
@@ -97,6 +100,7 @@ spec:
           - name: HDFS_CONF_dfs_namenode_datanode_registration_ip___hostname___check
             value: "false"
 ---
+# service for internal networking
 apiVersion: v1
 kind: Service
 metadata:

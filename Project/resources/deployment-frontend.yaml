@@ -9,7 +9,6 @@ spec:
   selector:
     matchLabels:
       app: frontend
-    
   replicas: 1
   minReadySeconds: 15
   strategy:
@@ -23,11 +22,12 @@ spec:
         app: frontend
     spec:
       containers:
-        - image: lichyyyyyy/14848-frontend:1.0
+        - image: lichyyyyyy/14848-frontend:1.1
           imagePullPolicy: IfNotPresent
           name: frontend
           ports:
             - containerPort: 3000
           env:
-            - name: REACT_APP_EIP
+            # configure the static ip
+            - name: REACT_APP_EIP 
               value: 35.192.106.235

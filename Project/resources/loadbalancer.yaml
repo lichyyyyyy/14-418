@@ -1,3 +1,4 @@
+# expose port 80 for frontend
 apiVersion: v1
 kind: Service
 metadata:
@@ -12,6 +13,7 @@ spec:
   selector:
     app: frontend
 ---
+# expose port 9870 for hadoop
 apiVersion: v1
 kind: Service
 metadata:
@@ -26,6 +28,7 @@ spec:
   selector:
     app: hadoop-namenode
 ---
+# expose port 9000 for sonar
 apiVersion: v1
 kind: Service
 metadata:
@@ -40,6 +43,7 @@ spec:
   selector:
     app: sonar
 ---
+# expose port 8080 for spark
 apiVersion: v1
 kind: Service
 metadata:
@@ -54,6 +58,7 @@ spec:
   selector:
     app: spark
 ---
+# expose port 8888 for jupyter
 apiVersion: v1
 kind: Service
 metadata:

@@ -1,3 +1,4 @@
+# deploy jupyter
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -22,7 +23,7 @@ spec:
         app: jupyter
     spec:
       containers:
-        - image: lichyyyyyy/14848-jupyter-notebook:1.1
+        - image: jupyter/base-notebook:latest
           imagePullPolicy: IfNotPresent
           name: jupyter
           ports:

@@ -1,3 +1,4 @@
+# deploy the spark service
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -26,8 +27,10 @@ spec:
           imagePullPolicy: IfNotPresent
           name: spark
           ports:
+            # the port to be exposed
             - containerPort: 8080
               name: ui-port
+            # the port for internal connection
             - containerPort: 7077
               name: spark-port
           env:
@@ -56,6 +59,7 @@ spec:
             - name: SPARK_WORKER_CORES
               value: "1"
 ---
+# configure the internal networking between workers and the master
 apiVersion: v1
 kind: Service
 metadata:
