@@ -1,12 +1,90 @@
 # README
 
-## Docker 
+
+
+## File directory
+
+```frontend/```: source codes for the frontend, which is implemented using React.
+
+```resources/```: source codes to deploy on k8s
+
+```checkpoint/```: the required screenshots for checkpoint
+
+`final/`: some screenshots for the whole project.
+
+
+
+## Steps
+
+1. Reserve a static IP for the application.
+
+   ```
+   gcloud compute addresses create big-data-toolbox --region us-central1
+   ```
+
+2. Configure regarding varibles to the static IP in the deployment files.
+
+   In `deployment-frontend.yaml`, update the env variable `REACT_APP_EIP`.
+
+   In `loadbalancer.yaml`, update the configuration  `loadBalancerIP`.
+
+3. Create a new GKE cluster.
+
+   ```
+   gcloud compute addresses create big-data-toolbox --region us-central1
+   ```
+
+   Check if the current-context of `kubectl` has been switch to the GKE cluster. If not, use the below command: 
+
+   ```
+   gcloud container clusters get-credentials big-data-toolbox --zone=us-central1-a
+   ```
+
+4. Create a namespace for the project.
+
+   ```shell
+   kubectl create ns project
+   ```
+
+5. Deploy microservices and the frontend application.
+
+   ```shell
+   kubectl apply -f deployment-frontend.yaml
+   kubectl apply -f deployment-hadoop.yaml
+   kubectl apply -f deployment-spark.yaml
+   kubectl apply -f deployment-jupyter.yaml
+   kubectl apply -f deployment-sonar.yaml
+   ```
+
+6. Deploy the loadbalancer.
+
+   ```
+   kubectl apply -f loadbalancer.yaml
+   ```
+
+7. Now you should be able to visit the application by simply hitting the static IP in your browser!
+
+
+
+## Recordings
+
+https://drive.google.com/drive/folders/1Dmw80tj1xW4n8P5EijEhw_wV7WVU0ypj?usp=sharing
+
+This shared folder contains 3 recording:
+
+1. demo
+2. code_walkthru_part1
+3. code_walkthru_part2
+
+
+
+## Images
 
 ### Dockerfile & Base images
 
 1. For the terminal: ```entry/Dockerfile```
 
-2. Jupiter notebook: https://hub.docker.com/r/ibmcom/jupyter-base-notebook-ppc64le
+2. Jupiter notebook: https://hub.docker.com/r/jupyter/base-notebook
 
 3. Spark: https://hub.docker.com/r/bitnami/spark
 
@@ -38,44 +116,3 @@
 
 
 
-## File directory
-
-```entry/```: source codes for the ternimal, which is implemented using Flask
-
-```resources/```: source codes to deploy on k8s
-
-```checkpoint/```: the required screenshots for checkpoint
-
-
-
-## Steps
-
-1. Create a namespace for the project.
-
-   ```shell
-   $ kubectl create ns project
-   ```
-
-2. Deploy all Deployments.
-
-   ```shell
-   $ kubectl apply -f deployment-controller.yaml
-   $ kubectl apply -f deployment-hadoop.yaml
-   $ kubectl apply -f deployment-spark.yaml
-   $ kubectl apply -f deployment-jupyter.yaml
-   $ kubectl apply -f deployment-sonar.yaml
-   ```
-
-3. Expose Services.
-
-   ```shell
-   $ kubectl apply -f services.yaml
-   ```
-
-4. Expose LoadBalancers.
-
-   ```shell
-   $ kubectl apply -f loadbalancer.yaml
-   ```
-
-   
