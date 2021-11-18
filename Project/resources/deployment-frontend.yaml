@@ -30,4 +30,4 @@ spec:
           env:
             # configure the static ip
             - name: REACT_APP_EIP 
-              value: 35.192.106.235
+              value: http://35.192.106.235

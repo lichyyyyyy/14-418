@@ -33,7 +33,7 @@ spec:
           - containerPort: 9000
         env:
           - name: CORE_CONF_fs_defaultFS
-            value: hdfs://namenode:9000
+            value: hdfs://hadoop-namenode:9000
           - name: CLUSTER_NAME
             value: mycluster
           - name: CORE_CONF_hadoop_http_staticuser_user
@@ -82,7 +82,7 @@ spec:
           - name: SERVICE_PRECONDITION
             value: "hadoop-namenode:9870"
           - name: CORE_CONF_fs_defaultFS
-            value: hdfs://namenode:9000
+            value: hdfs://hadoop-namenode:9000
           - name: CLUSTER_NAME
             value: mycluster
           - name: CORE_CONF_hadoop_http_staticuser_user
@@ -104,11 +104,15 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: namenode
+  name: hadoop-namenode
   namespace: project
 spec:
   ports:
+  - port: 9870
+    targetPort: 9870
+    name: external
   - port: 9000
     targetPort: 9000
+    name: hdfs
   selector:
     app: hadoop-namenode
